@@ -180,7 +180,9 @@ position:absolute;
 
 bottom:15px;
 
-left:300px;
+left:50%;
+
+transform:translateX(-50%);
 
 width:90px;
 
@@ -189,6 +191,8 @@ height:18px;
 background:#ff5d8f;
 
 border-radius:30px;
+
+}
 
 }
 
