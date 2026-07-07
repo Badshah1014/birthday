@@ -248,8 +248,48 @@ setTimeout(()=>{
 
 nextScreen("letter");
 
+setTimeout(showLetter,500);
+
 },1800);
 
 }
+
+}
+const birthdayLetter=
+
+`Happy Birthday 🌸
+
+I wanted to make you something
+different this year.
+
+Instead of only wishing you,
+I wanted to create a little adventure.
+
+I hope this made you smile.
+
+Have an amazing birthday
+and an even more amazing year ahead.`;
+
+function showLetter(){
+
+let i=0;
+
+const area=document.getElementById("letterText");
+
+area.innerHTML="";
+
+const timer=setInterval(()=>{
+
+area.innerHTML+=birthdayLetter.charAt(i);
+
+i++;
+
+if(i>=birthdayLetter.length){
+
+clearInterval(timer);
+
+}
+
+},35);
 
 }
