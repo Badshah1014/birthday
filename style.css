@@ -1,15 +1,22 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
 }
 
-body{
-    margin:0;
-    font-family:'Quicksand',sans-serif;
-    background:#0a192f;
-    color:white;
-    overflow:hidden;
+body {
+    font-family: 'Quicksand', sans-serif;
+    color: white;
+    overflow: hidden;
+
+    background: linear-gradient(
+        135deg,
+        #020024 0%,
+        #090979 35%,
+        #0f3460 70%,
+        #16213e 100%
+    );
 }
 
 @keyframes bgMove{
