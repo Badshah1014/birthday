@@ -203,3 +203,53 @@ spawnStar();
 },20);
 
 }
+
+let clicks=0;
+
+const gift=document.getElementById("giftBox");
+
+const giftMessage=document.getElementById("giftMessage");
+
+gift.onclick=()=>{
+
+clicks++;
+
+gift.style.transform="scale(.9)";
+
+setTimeout(()=>{
+
+gift.style.transform="scale(1.05)";
+
+},100);
+
+if(clicks==1){
+
+giftMessage.innerHTML="✨ Something is happening...";
+
+}
+
+if(clicks==2){
+
+giftMessage.innerHTML="🌸 Almost open...";
+
+}
+
+if(clicks>=3){
+
+gift.innerHTML="💖";
+
+gift.style.fontSize="150px";
+
+giftMessage.innerHTML=
+
+"Congratulations! A secret letter has appeared.";
+
+setTimeout(()=>{
+
+nextScreen("letter");
+
+},1800);
+
+}
+
+}
