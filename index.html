@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Happy Birthday 🌸</title>
+<title>Project Moonlight 🌙</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
 
@@ -24,58 +31,53 @@
 
 <p>A tiny magical adventure awaits...</p>
 
-<button onclick="nextScreen('story')">
+<button id="startBtn">
 
-Start Adventure ✨
+✨ Start Adventure ✨
 
 </button>
 
 </section>
 
 <!-- STORY -->
-  <!-- GAME -->
-  <!-- GIFT SCREEN -->
-  <section id="letter" class="screen">
 
-<div class="box">
+<section id="story" class="screen">
 
-<h2>💌</h2>
+<div class="dialog">
 
-<p id="letterText">
+<h2>🌙</h2>
 
-Loading...
+<p id="dialogue"></p>
 
-</p>
+<button id="nextBtn">
+
+Continue →
+
+</button>
 
 </div>
 
 </section>
 
-<section id="gift" class="screen">
-
-<h2>A Magical Gift Appeared ✨</h2>
-
-<p>Click the gift 3 times to open it.</p>
-
-<div id="giftBox">
-
-🎁
-
-</div>
-
-<div id="giftMessage"></div>
-
-</section>
+<!-- GAME -->
 
 <section id="game" class="screen">
 
-<h2>⭐ Collect 15 Stars ⭐</h2>
+<h2>
 
-<p>Move the basket and catch the falling stars.</p>
+⭐ Collect 15 Stars ⭐
+
+</h2>
+
+<p>
+
+Catch all the stars to unlock the gift.
+
+</p>
 
 <div id="score">
 
-Stars: 0 / 15
+Stars : 0 / 15
 
 </div>
 
@@ -87,54 +89,61 @@ Stars: 0 / 15
 
 </section>
 
-<section id="story" class="screen">
+<!-- GIFT -->
 
-<div class="box">
+<section id="gift" class="screen">
 
-<h2>🌙</h2>
+<h2>
 
-<p id="dialogue">
+🎁 Magical Gift
 
-Hello...
+</h2>
+
+<p>
+
+Click three times to open it.
 
 </p>
 
-<button onclick="nextDialogue()">
+<div id="giftBox">
 
-Continue
+🎁
 
-</button>
+</div>
+
+<div id="giftMessage"></div>
+
+</section>
+
+<!-- LETTER -->
+
+<section id="letter" class="screen">
+
+<div class="dialog">
+
+<h2>💌</h2>
+
+<p id="letterText"></p>
 
 </div>
 
 </section>
 
-<script src="script.js"></script>
-
-</body>
-
-</html>
-<!-- ENDING -->
+<!-- END -->
 
 <section id="ending" class="screen">
 
 <h1>🌙</h1>
 
-<h2>Happy Birthday</h2>
+<h2>
+
+Happy Birthday
+
+</h2>
 
 <p>
 
 Thank you for taking this little adventure.
-
-</p>
-
-<p>
-
-May this year bring you lots of happiness,
-
-beautiful memories,
-
-and reasons to smile every day.
 
 </p>
 
@@ -148,14 +157,20 @@ by
 
 <br><br>
 
-<b>Swarup</b>
+Swarup
 
 </h3>
 
-<button onclick="location.reload()">
+<button id="restartBtn">
 
 Replay Adventure
 
 </button>
 
 </section>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
