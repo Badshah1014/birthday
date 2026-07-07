@@ -1,59 +1,62 @@
-const stars=document.getElementById("stars");
+// ===============================
+// PROJECT MOONLIGHT - SCRIPT 3A
+// ===============================
 
-for(let i=0;i<250;i++){
+// ---------- BACKGROUND STARS ----------
 
-const s=document.createElement("div");
+const stars = document.getElementById("stars");
 
-s.className="star";
+for (let i = 0; i < 250; i++) {
 
-let size=Math.random()*3+1;
+    const s = document.createElement("div");
 
-s.style.width=size+"px";
+    s.className = "star";
 
-s.style.height=size+"px";
+    const size = Math.random() * 3 + 1;
 
-s.style.left=Math.random()*100+"vw";
+    s.style.width = size + "px";
+    s.style.height = size + "px";
 
-s.style.top=Math.random()*100+"vh";
+    s.style.left = Math.random() * 100 + "vw";
+    s.style.top = Math.random() * 100 + "vh";
 
-s.style.animationDuration=(2+Math.random()*4)+"s";
+    s.style.animationDuration = (2 + Math.random() * 4) + "s";
 
-stars.appendChild(s);
+    stars.appendChild(s);
 
 }
+
+// ---------- SCREEN SWITCHING ----------
 
 function nextScreen(id){
 
-    const current=document.querySelector(".active");
+    const current = document.querySelector(".screen.active");
 
-    current.style.opacity="0";
+    current.classList.remove("active");
 
-    current.style.transition="opacity 1s";
-
-    setTimeout(()=>{
-
-        current.classList.remove("active");
-
-        current.style.opacity="1";
-
-        const next=document.getElementById(id);
-
-        next.classList.add("active");
-
-    },1000);
+    document.getElementById(id).classList.add("active");
 
 }
 
+// ---------- STORY ----------
+
 const lines = [
-    "Hello... 🌸",
-    "I've been looking for you.",
-    "Today is someone's very special day.",
-    "Will you help me deliver a birthday wish? ✨"
+
+"The stars whispered your name tonight... 🌸",
+
+"So I followed their light.",
+
+"Until I found you.",
+
+"Today is someone's very special day.",
+
+"Will you help me collect 15 birthday stars? ✨"
+
 ];
 
-let current=0;
+let currentLine = 0;
 
-const dialogue=document.getElementById("dialogue");
+const dialogue = document.getElementById("dialogue");
 
 function typeText(text){
 
@@ -61,7 +64,7 @@ function typeText(text){
 
     let i=0;
 
-    let timer=setInterval(()=>{
+    const timer=setInterval(()=>{
 
         dialogue.innerHTML+=text.charAt(i);
 
@@ -69,7 +72,7 @@ function typeText(text){
 
         if(i>=text.length){
 
-           clearInterval(timer);
+            clearInterval(timer);
 
         }
 
@@ -77,258 +80,297 @@ function typeText(text){
 
 }
 
-function nextDialogue(){
+typeText(lines[0]);
 
-    current++;
+document.getElementById("startBtn").onclick=()=>{
 
-    if(current<lines.length){
+    nextScreen("story");
 
-        typeText(lines[current]);
+    currentLine=0;
+
+    typeText(lines[currentLine]);
+
+}
+
+document.getElementById("nextBtn").onclick=()=>{
+
+    currentLine++;
+
+    if(currentLine<lines.length){
+
+        typeText(lines[currentLine]);
 
     }
 
     else{
 
-       nextScreen("game");
+        nextScreen("game");
 
-startGame();
+        startGame();
 
     }
 
-} 
+}
 
-typeText(lines[0]);
+// ---------- GAME ----------
 
-let basket=document.getElementById("basket");
+const basket=document.getElementById("basket");
 
-let game=document.getElementById("gameArea");
+const game=document.getElementById("gameArea");
 
-let score=0;
+const scoreText=document.getElementById("score");
 
 let basketX=300;
 
-document.addEventListener("keydown",e=>{
+let score=0;
 
-if(e.key==="ArrowLeft") basketX-=25;
+document.addEventListener("keydown",(e)=>{
 
-if(e.key==="ArrowRight") basketX+=25;
+    if(!document.getElementById("game").classList.contains("active")) return;
 
-basketX=Math.max(0,Math.min(620,basketX));
+    if(e.key==="ArrowLeft") basketX-=25;
 
-basket.style.left=basketX+"px";
+    if(e.key==="ArrowRight") basketX+=25;
+
+    basketX=Math.max(0,Math.min(game.clientWidth-90,basketX));
+
+    basket.style.left=basketX+"px";
 
 });
 
 function startGame(){
 
-score=0;
+    basketX=(game.clientWidth-90)/2;
 
-document.getElementById("score").innerHTML="Stars: 0 / 15";
+    basket.style.left=basketX+"px";
 
-spawnStar();
+    score=0;
+
+    scoreText.innerHTML="Stars : 0 / 15";
+
+    spawnStar();
 
 }
 
 function spawnStar(){
 
-let star=document.createElement("div");
+    const star=document.createElement("div");
 
-star.className="starFall";
+    star.className="starFall";
 
-star.style.left=Math.random()*660+"px";
+    star.style.left=Math.random()*(game.clientWidth-30)+"px";
 
-star.style.top="-20px";
+    star.style.top="-30px";
 
-game.appendChild(star);
+    game.appendChild(star);
 
-let y=-20;
+    let y=-30;
 
-let fall=setInterval(()=>{
+    const fall=setInterval(()=>{
 
-y+=4;
+        y+=4;
 
-star.style.top=y+"px";
+        star.style.top=y+"px";
 
-let sx=parseInt(star.style.left);
+        const x=parseFloat(star.style.left);
 
-if(
+        if(
 
-y>460 &&
+            y>game.clientHeight-45 &&
 
-sx>basketX-20 &&
+            x>basketX-20 &&
 
-sx<basketX+80
+            x<basketX+90
 
-){
+        ){
 
-clearInterval(fall);
+            clearInterval(fall);
 
-star.remove();
+            star.remove();
 
-score++;
+            score++;
 
-document.getElementById("score").innerHTML=
+            scoreText.innerHTML="Stars : "+score+" / 15";
 
-"Stars: "+score+" / 15";
+            if(score>=15){
 
-if(score<15){
+                setTimeout(()=>{
 
-spawnStar();
+                    nextScreen("gift");
 
-}else{
+                },600);
 
-setTimeout(()=>{
+            }else{
 
-nextScreen("gift");
+                spawnStar();
 
-},500);
+            }
 
-}
+        }
 
-}
+        if(y>game.clientHeight){
 
-if(y>520){
+            clearInterval(fall);
 
-clearInterval(fall);
+            star.remove();
 
-star.remove();
+            spawnStar();
 
-spawnStar();
+        }
 
-}
-
-},20);
+    },20);
 
 }
 
-let clicks=0;
+// ===============================
+// PROJECT MOONLIGHT - SCRIPT 3B
+// ===============================
 
-const gift=document.getElementById("giftBox");
+// ---------- GIFT ----------
 
-const giftMessage=document.getElementById("giftMessage");
+let giftClicks = 0;
 
-gift.onclick=()=>{
+const giftBox = document.getElementById("giftBox");
+const giftMessage = document.getElementById("giftMessage");
 
-clicks++;
+giftBox.onclick = () => {
 
-gift.style.transform="scale(.9)";
+    giftClicks++;
 
-setTimeout(()=>{
+    giftBox.style.transform = "scale(.9)";
 
-gift.style.transform="scale(1.05)";
+    setTimeout(() => {
+        giftBox.style.transform = "scale(1)";
+    }, 120);
 
-},100);
+    if (giftClicks === 1) {
+        giftMessage.innerHTML = "✨ Something is happening...";
+    }
 
-if(clicks==1){
+    if (giftClicks === 2) {
+        giftMessage.innerHTML = "🌸 Almost there...";
+    }
 
-giftMessage.innerHTML="✨ Something is happening...";
+    if (giftClicks >= 3) {
 
-}
+        giftBox.innerHTML = "💌";
 
-if(clicks==2){
+        giftBox.style.fontSize = "140px";
 
-giftMessage.innerHTML="🌸 Almost open...";
+        giftMessage.innerHTML = "A letter appeared...";
 
-}
+        setTimeout(() => {
 
-if(clicks>=3){
+            nextScreen("letter");
 
-gift.innerHTML="💖";
+            showLetter();
 
-gift.style.fontSize="150px";
+        }, 1500);
 
-giftMessage.innerHTML=
+    }
 
-"Congratulations! A secret letter has appeared.";
+};
 
-setTimeout(()=>{
+// ---------- LETTER ----------
 
-nextScreen("letter");
+const birthdayLetter = `Happy Birthday 🌸
 
-setTimeout(showLetter,500);
+I wanted to make you something a little different this year.
 
-},1800);
-
-}
-
-}
-const birthdayLetter=
-
-`Happy Birthday 🌸
-
-I wanted to make you something
-different this year.
-
-Instead of only wishing you,
-I wanted to create a little adventure.
+Instead of sending only a message,
+I wanted to build a tiny adventure just for you.
 
 I hope this made you smile.
 
-Have an amazing birthday
-and an even more amazing year ahead.`;
+May this year bring you happiness,
+good health,
+lots of laughter,
+and beautiful memories.
 
-function showLetter(){
+Happy Birthday! ❤️`;
 
-let i=0;
+function showLetter() {
 
-const area=document.getElementById("letterText");
+    const area = document.getElementById("letterText");
 
-area.innerHTML="";
+    area.innerHTML = "";
 
-const timer=setInterval(()=>{
+    let i = 0;
 
-area.innerHTML+=birthdayLetter.charAt(i);
+    const timer = setInterval(() => {
 
-i++;
+        area.innerHTML += birthdayLetter.charAt(i);
 
-if(i>=birthdayLetter.length){
+        i++;
 
-clearInterval(timer);
+        if (i >= birthdayLetter.length) {
 
-}
+            clearInterval(timer);
 
-},35);
+            setTimeout(() => {
 
-}
-function firework(x,y){
+                nextScreen("ending");
 
-for(let i=0;i<30;i++){
+            }, 2500);
 
-const p=document.createElement("div");
+        }
 
-p.className="firework";
-
-p.style.left=x+"px";
-
-p.style.top=y+"px";
-
-const angle=Math.random()*Math.PI*2;
-
-p.style.setProperty("--x",Math.cos(angle));
-
-p.style.setProperty("--y",Math.sin(angle));
-
-document.body.appendChild(p);
-
-setTimeout(()=>p.remove(),1000);
+    }, 30);
 
 }
 
+// ---------- FIREWORKS ----------
+
+function firework(x, y) {
+
+    for (let i = 0; i < 30; i++) {
+
+        const p = document.createElement("div");
+
+        p.className = "firework";
+
+        p.style.left = x + "px";
+        p.style.top = y + "px";
+
+        const angle = Math.random() * Math.PI * 2;
+
+        p.style.setProperty("--x", Math.cos(angle));
+        p.style.setProperty("--y", Math.sin(angle));
+
+        document.body.appendChild(p);
+
+        setTimeout(() => {
+
+            p.remove();
+
+        }, 1000);
+
+    }
+
 }
-setInterval(()=>{
 
-const ending=document.getElementById("ending");
+setInterval(() => {
 
-if(ending && ending.classList.contains("active")){
+    const ending = document.getElementById("ending");
 
-firework(
+    if (ending.classList.contains("active")) {
 
-Math.random()*window.innerWidth,
+        firework(
 
-Math.random()*window.innerHeight/2
+            Math.random() * window.innerWidth,
 
-);
+            Math.random() * (window.innerHeight / 2)
 
-}
+        );
 
-},700);
+    }
+
+}, 700);
+
+// ---------- REPLAY ----------
+
+document.getElementById("restartBtn").onclick = () => {
+
+    location.reload();
+
+};
