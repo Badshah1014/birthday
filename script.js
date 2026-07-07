@@ -72,7 +72,13 @@ function typeText(text){
 
         if(i>=text.length){
 
-            clearInterval(timer);
+           clearInterval(timer);
+
+setTimeout(()=>{
+
+nextScreen("ending");
+
+},3000);
 
         }
 
