@@ -182,7 +182,7 @@ spawnStar();
 
 setTimeout(()=>{
 
-alert("🎁 Gift Unlocked!");
+nextScreen("gift");
 
 },500);
 
