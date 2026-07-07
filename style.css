@@ -7,11 +7,7 @@
 body{
     margin:0;
     font-family:'Quicksand',sans-serif;
-
-    background:linear-gradient(-45deg,#0f172a,#1d4ed8,#312e81,#1e1b4b);
-    background-size:400% 400%;
-    animation:bgMove 12s ease infinite;
-
+    background:#0a192f;
     color:white;
     overflow:hidden;
 }
