@@ -1,44 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday ✨</title>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Happy Birthday 🌸</title>
 
 <link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 <div id="stars"></div>
 
-<div id="landing" class="screen">
+<!-- LANDING -->
+
+<section id="landing" class="screen active">
 
 <h1>Happy Birthday 🌸</h1>
 
-<p>A tiny adventure is waiting for you...</p>
+<p>A tiny magical adventure awaits...</p>
 
-<button id="startBtn">Start Adventure ✨</button>
+<button onclick="nextScreen('story')">
+
+Start Adventure ✨
+
+</button>
+
+</section>
+
+<!-- STORY -->
+
+<section id="story" class="screen">
+
+<div class="box">
+
+<h2>🌙</h2>
+
+<p id="dialogue">
+
+Hello...
+
+</p>
+
+<button onclick="nextDialogue()">
+
+Continue
+
+</button>
 
 </div>
 
-<div id="story" class="screen hidden">
-
-<div class="dialog">
-
-<h2>🐱</h2>
-
-<p id="text"></p>
-
-<button id="nextBtn">Continue ➜</button>
-
-</div>
-
-</div>
+</section>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
