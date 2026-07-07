@@ -324,3 +324,20 @@ setTimeout(()=>p.remove(),1000);
 }
 
 }
+setInterval(()=>{
+
+const ending=document.getElementById("ending");
+
+if(ending.classList.contains("active")){
+
+firework(
+
+Math.random()*window.innerWidth,
+
+Math.random()*window.innerHeight/2
+
+);
+
+}
+
+},700);
