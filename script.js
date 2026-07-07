@@ -92,10 +92,114 @@ function nextDialogue(){
 
     else{
 
-        alert("⭐ Mini Game Coming!");
+       nextScreen("game");
+
+startGame();
 
     }
 
 } 
 
 typeText(lines[0]);
+
+let basket=document.getElementById("basket");
+
+let game=document.getElementById("gameArea");
+
+let score=0;
+
+let basketX=300;
+
+document.addEventListener("keydown",e=>{
+
+if(e.key==="ArrowLeft") basketX-=25;
+
+if(e.key==="ArrowRight") basketX+=25;
+
+basketX=Math.max(0,Math.min(620,basketX));
+
+basket.style.left=basketX+"px";
+
+});
+
+function startGame(){
+
+score=0;
+
+document.getElementById("score").innerHTML="Stars: 0 / 15";
+
+spawnStar();
+
+}
+
+function spawnStar(){
+
+let star=document.createElement("div");
+
+star.className="starFall";
+
+star.style.left=Math.random()*660+"px";
+
+star.style.top="-20px";
+
+game.appendChild(star);
+
+let y=-20;
+
+let fall=setInterval(()=>{
+
+y+=4;
+
+star.style.top=y+"px";
+
+let sx=parseInt(star.style.left);
+
+if(
+
+y>460 &&
+
+sx>basketX-20 &&
+
+sx<basketX+80
+
+){
+
+clearInterval(fall);
+
+star.remove();
+
+score++;
+
+document.getElementById("score").innerHTML=
+
+"Stars: "+score+" / 15";
+
+if(score<15){
+
+spawnStar();
+
+}else{
+
+setTimeout(()=>{
+
+alert("🎁 Gift Unlocked!");
+
+},500);
+
+}
+
+}
+
+if(y>520){
+
+clearInterval(fall);
+
+star.remove();
+
+spawnStar();
+
+}
+
+},20);
+
+}
