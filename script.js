@@ -1,63 +1,62 @@
 const stars=document.getElementById("stars");
 
-for(let i=0;i<200;i++){
+for(let i=0;i<250;i++){
 
-let s=document.createElement("div");
+const s=document.createElement("div");
 
-s.style.position="absolute";
-s.style.width="2px";
-s.style.height="2px";
-s.style.background="white";
-s.style.borderRadius="50%";
+s.className="star";
+
+let size=Math.random()*3+1;
+
+s.style.width=size+"px";
+
+s.style.height=size+"px";
 
 s.style.left=Math.random()*100+"vw";
+
 s.style.top=Math.random()*100+"vh";
 
-s.animate([
-{opacity:.2},
-{opacity:1},
-{opacity:.2}
-],{
-duration:2000+Math.random()*3000,
-iterations:Infinity
-});
+s.style.animationDuration=(2+Math.random()*4)+"s";
 
 stars.appendChild(s);
 
 }
 
-const story=[
-"Hello... 🌸",
-"I've been searching for you.",
-"Today is someone's very special day.",
-"Will you help me deliver a birthday wish? ✨"
-];
+function nextScreen(id){
 
-let index=0;
+document.querySelector(".active").classList.remove("active");
 
-const text=document.getElementById("text");
-
-document.getElementById("startBtn").onclick=()=>{
-
-document.getElementById("landing").classList.add("hidden");
-
-document.getElementById("story").classList.remove("hidden");
-
-text.innerHTML=story[index];
+document.getElementById(id).classList.add("active");
 
 }
 
-document.getElementById("nextBtn").onclick=()=>{
+const lines=[
 
-index++;
+"Hello... 🌸",
 
-if(index<story.length){
+"I've been looking for you.",
 
-text.innerHTML=story[index];
+"Today is someone's very special day.",
 
-}else{
+"Will you help me deliver a birthday wish? ✨"
 
-alert("⭐ Next: The Star Collection Mini-Game!");
+];
+
+let current=0;
+
+function nextDialogue(){
+
+current++;
+
+if(current<lines.length){
+
+document.getElementById("dialogue").innerHTML=lines[current];
+
+}
+
+else{
+
+alert("Next Chapter: ⭐ Collect the Stars");
 
 }
 
