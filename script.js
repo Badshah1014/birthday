@@ -24,13 +24,25 @@ stars.appendChild(s);
 
 function nextScreen(id){
 
-document.querySelector(".active").classList.remove("active");
+    const current=document.querySelector(".active");
 
-document.getElementById(id).classList.add("active");
+    current.style.opacity="0";
+
+    current.style.transition="opacity 1s";
+
+    setTimeout(()=>{
+
+        current.classList.remove("active");
+
+        current.style.opacity="1";
+
+        const next=document.getElementById(id);
+
+        next.classList.add("active");
+
+    },1000);
 
 }
-
-const lines=[
 
 "Hello... 🌸",
 
@@ -44,20 +56,46 @@ const lines=[
 
 let current=0;
 
+const dialogue=document.getElementById("dialogue");
+
+function typeText(text){
+
+    dialogue.innerHTML="";
+
+    let i=0;
+
+    let timer=setInterval(()=>{
+
+        dialogue.innerHTML+=text.charAt(i);
+
+        i++;
+
+        if(i>=text.length){
+
+            clearInterval(timer);
+
+        }
+
+    },35);
+
+}
+
 function nextDialogue(){
 
-current++;
+    current++;
 
-if(current<lines.length){
+    if(current<lines.length){
 
-document.getElementById("dialogue").innerHTML=lines[current];
+        typeText(lines[current]);
 
-}
+    }
 
-else{
+    else{
 
-alert("Next Chapter: ⭐ Collect the Stars");
+        alert("⭐ Mini Game Coming!");
 
-}
+    }
 
-}
+} 
+
+typeText(lines[0]);
