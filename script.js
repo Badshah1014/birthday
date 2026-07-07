@@ -124,19 +124,32 @@ let basketX=300;
 
 let score=0;
 
-document.addEventListener("keydown",(e)=>{
+function moveBasket(x){
 
-    if(!document.getElementById("game").classList.contains("active")) return;
+    const rect = game.getBoundingClientRect();
 
-    if(e.key==="ArrowLeft") basketX-=25;
+    basketX = x - rect.left - 45;
 
-    if(e.key==="ArrowRight") basketX+=25;
+    basketX = Math.max(0, Math.min(game.clientWidth - 90, basketX));
 
-    basketX=Math.max(0,Math.min(game.clientWidth-90,basketX));
+    basket.style.left = basketX + "px";
 
-    basket.style.left=basketX+"px";
+}
 
+// Desktop
+game.addEventListener("mousemove",(e)=>{
+    if(document.getElementById("game").classList.contains("active")){
+        moveBasket(e.clientX);
+    }
 });
+
+// Mobile
+game.addEventListener("touchmove",(e)=>{
+    if(document.getElementById("game").classList.contains("active")){
+        moveBasket(e.touches[0].clientX);
+        e.preventDefault();
+    }
+},{passive:false});
 
 function startGame(){
 
