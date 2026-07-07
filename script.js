@@ -299,3 +299,28 @@ clearInterval(timer);
 },35);
 
 }
+function firework(x,y){
+
+for(let i=0;i<30;i++){
+
+const p=document.createElement("div");
+
+p.className="firework";
+
+p.style.left=x+"px";
+
+p.style.top=y+"px";
+
+const angle=Math.random()*Math.PI*2;
+
+p.style.setProperty("--x",Math.cos(angle));
+
+p.style.setProperty("--y",Math.sin(angle));
+
+document.body.appendChild(p);
+
+setTimeout(()=>p.remove(),1000);
+
+}
+
+}
