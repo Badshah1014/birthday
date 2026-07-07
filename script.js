@@ -44,14 +44,11 @@ function nextScreen(id){
 
 }
 
-"Hello... 🌸",
-
-"I've been looking for you.",
-
-"Today is someone's very special day.",
-
-"Will you help me deliver a birthday wish? ✨"
-
+const lines = [
+    "Hello... 🌸",
+    "I've been looking for you.",
+    "Today is someone's very special day.",
+    "Will you help me deliver a birthday wish? ✨"
 ];
 
 let current=0;
@@ -73,12 +70,6 @@ function typeText(text){
         if(i>=text.length){
 
            clearInterval(timer);
-
-setTimeout(()=>{
-
-nextScreen("ending");
-
-},3000);
 
         }
 
@@ -328,7 +319,7 @@ setInterval(()=>{
 
 const ending=document.getElementById("ending");
 
-if(ending.classList.contains("active")){
+if(ending && ending.classList.contains("active")){
 
 firework(
 
